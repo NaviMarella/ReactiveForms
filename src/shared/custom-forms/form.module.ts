@@ -2,7 +2,6 @@ import { NgModule, NO_ERRORS_SCHEMA } from "@angular/core";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { CommonModule } from "@angular/common";
 import { FormInputComponent } from "../custom-forms/fields/input/input.component";
-
 @NgModule({
   imports: [FormsModule, ReactiveFormsModule, CommonModule],
   providers: [],

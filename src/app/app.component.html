@@ -1,12 +1,18 @@
-<!--The content below is only a placeholder and can be replaced.-->
+<!-- The content below is only a placeholder and can be replaced. -->
 <div style="text-align:center">
-	<h1>
-		Welcome to {{ title }}!
-	</h1>
-	<form [formGroup]="userForm">
-		<form-input [label]="'NickName'" formControlName="nickName"></form-input>
-	</form>
-	<p>Form: {{ userForm.value | json }}</p>
-	<p>Form status: {{ userForm.status }}</p>
-	<p>NickName errors: {{ userForm.get('nickName').errors | json }}</p>
+  <h1>Welcome to {{ title }}!</h1>
+  <form [formGroup]="userForm">
+    <form-input [label]="'NickName'" formControlName="nickName"></form-input>
+    <form-input
+      [label]="'New Password'"
+      formControlName="newPassword"
+    ></form-input>
+    <form-input
+      [label]="'Confirm Password'"
+      formControlName="confirmPassword"
+    ></form-input>
+  </form>
+  <p>Form: {{ userForm.value | json }}</p>
+  <p>Form status: {{ userForm.status }}</p>
+  <p>Form errors: {{ userForm.get('newPassword').errors | json }}</p>
 </div>

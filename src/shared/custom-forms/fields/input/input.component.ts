@@ -9,8 +9,10 @@ import {
   ElementRef
 } from "@angular/core";
 import {
-  NgModel,
-  NG_VALUE_ACCESSOR,
+  AbstractControl,
+  AsyncValidatorFn,
+  ValidatorFn,
+  Validators,
   NG_VALIDATORS,
   NG_ASYNC_VALIDATORS,
   NgControl
@@ -23,6 +25,7 @@ import { ElementBase } from "../../base";
 })
 export class FormInputComponent extends ElementBase<string> implements OnInit {
   @Input() public label: string;
+  @Input() public type: string = "text";
   @Input() public help: string;
   @Input() protected serverErrors: Array<string>;
   @Input() public hidden: boolean = false;
@@ -36,14 +39,12 @@ export class FormInputComponent extends ElementBase<string> implements OnInit {
   public labelClass;
   private timeLimit: number = 0;
 
-  constructor(
-    @Optional() @Inject(NG_VALIDATORS) validators: Array<any>,
-    @Optional() @Inject(NG_ASYNC_VALIDATORS) asyncValidators: Array<any>,
-    @Optional() @Self() public ngControl: NgControl
-  ) {
-    super(validators, asyncValidators);
+  constructor(@Optional() @Self() public ngControl: NgControl) {
+    super();
+
     if (this.ngControl != null) {
       this.ngControl.valueAccessor = this;
+      console.log(this.ngControl);
     }
     this.serverErrors = this.serverErrors || new Array<string>();
   }
@@ -52,6 +53,12 @@ export class FormInputComponent extends ElementBase<string> implements OnInit {
     if (this.readonly) {
       this.setDisabledState(this.readonly);
     }
+    let control = this.ngControl.control;
+    let validators: ValidatorFn = control.validator;
+    let asyncValidators: ValidatorFn = control.asyncValidator;
+    this.setValidators(validators, asyncValidators);
+    //control.setValidators(validators);
+    //control.updateValueAndValidity();
   }
 
   onInputChange(event: any) {
