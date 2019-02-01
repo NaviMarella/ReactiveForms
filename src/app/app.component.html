@@ -1,0 +1,12 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<div style="text-align:center">
+	<h1>
+		Welcome to {{ title }}!
+	</h1>
+	<form [formGroup]="userForm">
+		<form-input [label]="'NickName'" formControlName="nickName"></form-input>
+	</form>
+	<p>Form: {{ userForm.value | json }}</p>
+	<p>Form status: {{ userForm.status }}</p>
+	<p>NickName errors: {{ userForm.get('nickName').errors | json }}</p>
+</div>

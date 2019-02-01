@@ -1,0 +1,13 @@
+<div [hidden]="hidden">
+	<label [attr.for]="identifier">{{label}}</label>
+  <input type="text" [attr.id]="identifier"
+    [attr.aria-describedby]="helpIdentifier"
+    (input)="onInputChange($event)"
+    (blur)="onBlur()"
+    [readonly]="readonly"
+    [placeholder]="placeHolder"
+  />
+  <div *ngIf="invalid | async" class="invalid-feedback">
+    <ul><li *ngFor="let error of errors | async">{{error}}</li></ul>
+  </div>
+</div>
