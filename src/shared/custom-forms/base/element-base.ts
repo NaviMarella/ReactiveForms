@@ -16,11 +16,16 @@ export abstract class ElementBase<T> extends ValueAccessorBase<T> {
   protected abstract ngControl: NgControl;
   protected abstract serverErrors: Array<string>;
 
-  constructor(
-    protected validators: ValidatorArray,
-    protected asyncValidators: AsyncValidatorArray
-  ) {
+  protected validators: ValidatorArray;
+  protected asyncValidators: AsyncValidatorArray;
+
+  constructor() {
     super();
+  }
+
+  public setValidators(validators, asyncValidators) {
+    this.validators = [...this.validators, validators];
+    this.asyncValidators = [...this.asyncValidators, asyncValidators];
   }
 
   public validate(): Observable<ValidationResult> {
